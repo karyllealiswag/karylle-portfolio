@@ -3,6 +3,24 @@
 import { useEffect } from "react";
 import type { RefObject } from "react";
 
+/**
+ * Styling note for every modal file that imports this hook (all of
+ * src/components/modal/modals/*.tsx):
+ *
+ * Tailwind classes applied to a react95 component (Button, Window,
+ * WindowHeader, WindowContent, ...) need the `!` suffix for any property
+ * react95 itself also sets on that element (padding, display, width/height,
+ * border, background, etc.) — e.g. `p-3!`, not `p-3`. Otherwise the class is
+ * silently ignored: Tailwind v4 puts all utilities inside `@layer utilities`,
+ * react95's styled-components CSS is unlayered, and per the CSS cascade spec
+ * unlayered rules always beat layered ones for normal (non-!important)
+ * declarations, regardless of specificity or source order. `!important`
+ * (Tailwind's `!` suffix) is evaluated before layering, so it reliably wins.
+ *
+ * Plain HTML elements you author yourself (div, span, button you wrote,
+ * etc.) never need this — only react95's own components do.
+ */
+
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 

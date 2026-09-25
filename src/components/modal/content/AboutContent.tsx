@@ -1,57 +1,64 @@
 import { portfolio } from "@/data/portfolio";
-import { Button, Cutout } from "react95";
+import { Button, Cutout, GroupBox, Divider } from "react95";
 import Image from "next/image";
 
 export default function AboutContent() {
   return (
-    <Cutout className="bg-white w-full h-full">
-      {/* 
-        The grid strictly divides the wide window into two columns. 
-        1.5fr for text (left), 1fr for the image (right). 
-      */}
-      <div className="grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] gap-6 sm:gap-10 p-6 sm:p-8">
+    <Cutout className="bg-[#c6c6c6] w-full h-full p-1">
+      <div className="border-2 border-white border-b-gray-800 border-r-gray-800 p-4 sm:p-6 flex flex-col h-full bg-[#c6c6c6]">
         
-        {/* Left Column: Heavy Header & Compact Text */}
-        <div className="flex flex-col gap-5">
-          <h1 
-            className="text-black drop-shadow-sm"
-            style={{ 
-              fontSize: "clamp(2.5rem, 5vw, 3.5rem)", // Forces the text to be massive and scale with the window
-              lineHeight: "1", 
-              fontWeight: "900",
-              letterSpacing: "-0.05em"
-            }}
-          >
-            Welcome to<br />
-            {portfolio.name}!
-          </h1>
+        {/* Header: Classic Win95 System Dialog Style */}
+        <div className="flex flex-col items-center gap-6 text-center sm:flex-row-reverse sm:items-start sm:text-left mb-2 sm:justify-between">
           
-          <div className="space-y-4 text-sm leading-snug text-black">
+          {/* Inset Cutout around the image */}
+          <Cutout className="shrink-0 inline-block bg-white p-1">
+            <Image
+              src="/pfp.jpg"
+              alt={`${portfolio.name}'s Profile`}
+              width={140}
+              height={140}
+              className="h-auto w-32 object-cover [image-rendering:pixelated] sm:w-36 border border-gray-400"
+              priority
+            />
+          </Cutout>
+
+          <div className="flex-1 w-full text-left font-sans">
+            <div className="mb-4">
+              <p className="text-sm text-black">System:</p>
+              <p className="text-[#000080] text-lg font-bold leading-tight">
+                Portfolio OS
+              </p>
+              <p className="text-[#000080] text-sm font-bold">
+                Version 1.0
+              </p>
+            </div>
+
+            {/* Classic "Registered To" block */}
+            <div className="text-sm text-black space-y-1">
+              <p>Registered to:</p>
+              <p className="pl-4">{portfolio.name}</p>
+              <p className="pl-4">B.S. Computer Science</p>
+            </div>
+          </div>
+        </div>
+
+        <Divider className="my-4" />
+
+        {/* Content: GroupBox creates the native tabbed-window feel */}
+        <GroupBox label="Biography" className="flex-1 text-black bg-[#c6c6c6]">
+          <div className="mt-2 space-y-3 text-sm leading-relaxed p-2 overflow-y-auto max-h-[35vh]">
             {portfolio.about.paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 24)}>{paragraph}</p>
             ))}
           </div>
+        </GroupBox>
 
-          <div className="pt-2">
-            <Button className="font-bold cursor-pointer px-4">
-              View Resume
-            </Button>
-          </div>
+        {/* Action Row */}
+        <div className="pt-6 flex justify-end mt-auto">
+          <Button className="font-bold cursor-pointer px-6 min-w-[120px]">
+            View Resume
+          </Button>
         </div>
-
-        {/* Right Column: Anchored Image */}
-        <div className="flex justify-center items-start pt-2">
-          <Image 
-            src="/pfp.jpg" 
-            alt={`${portfolio.name}'s Profile`} 
-            width={280} 
-            height={280} 
-            className="w-full max-w-[240px] h-auto object-contain"
-            style={{ imageRendering: "pixelated" }}
-            priority
-          />
-        </div>
-        
       </div>
     </Cutout>
   );
