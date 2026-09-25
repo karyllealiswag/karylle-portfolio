@@ -1,10 +1,8 @@
-import type { TimelineEntry } from "@/data/portfolio";
+import { portfolio } from "@/data/portfolio";
 
-interface ListModalProps {
-  entries: TimelineEntry[];
-}
+export default function EducationContent() {
+  const entries = portfolio.education;
 
-export default function ListModal({ entries }: ListModalProps) {
   if (entries.length === 0) {
     return (
       <p className="text-sm italic">

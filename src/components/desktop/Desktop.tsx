@@ -3,8 +3,7 @@
 import { useCallback, useState } from "react";
 import { DesktopBackground } from "./DesktopBackground";
 import { DesktopIcon } from "./DesktopIcon";
-import { ModalWindow } from "@/components/modal/ModalWindow";
-import { ModalContent } from "@/components/modal/ModalContent";
+import { ActiveModal } from "@/components/modal/ActiveModal";
 import { MODAL_DEFS, type ModalId } from "./modal-registry";
 
 export function Desktop() {
@@ -29,14 +28,12 @@ export function Desktop() {
         ))}
       </main>
       {activeModal ? (
-        <ModalWindow
-          titleId={`modal-title-${activeModal.id}`}
+        <ActiveModal
+          id={activeModal.id}
           title={activeModal.title}
           Icon={activeModal.Icon}
           onClose={closeModal}
-        >
-          <ModalContent id={activeModal.id} />
-        </ModalWindow>
+        />
       ) : null}
     </div>
   );
