@@ -1,8 +1,13 @@
 import { portfolio } from "@/data/portfolio";
+import type { ProjectEntry } from "@/data/portfolio";
 import { ProjectsIcon } from "@/components/icons";
 import { Cutout, Divider } from "react95";
 
-export default function ProjectsContent() {
+interface ProjectsContentProps {
+  onSelectProject: (project: ProjectEntry) => void;
+}
+
+export default function ProjectsContent({ onSelectProject }: ProjectsContentProps) {
   return (
     <Cutout className="bg-[#c6c6c6] w-full h-full p-1">
       <div className="border-2 border-white border-b-gray-800 border-r-gray-800 p-4 sm:p-6 flex flex-col h-full bg-[#c6c6c6]">
@@ -31,11 +36,7 @@ export default function ProjectsContent() {
             {portfolio.projects.map((project) => (
               <button
                 key={project.id}
-                onClick={() => {
-                  // TODO: Wire up your modal state here
-                  // e.g., openProjectModal(project)
-                  console.log("Trigger modal for:", project.name);
-                }}
+                onClick={() => onSelectProject(project)}
                 className="flex flex-col text-left items-start gap-2 p-3 border border-transparent hover:border-dotted hover:border-gray-400 hover:bg-[#000080] hover:text-white group focus:outline-none focus:bg-[#000080] focus:text-white transition-none"
               >
                 <div className="flex items-center gap-3 w-full">

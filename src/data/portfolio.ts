@@ -14,7 +14,7 @@ export interface ProjectEntry {
   period?: string;
   description: string;
   tags?: string[];
-  repoUrl: string;
+  repoUrl?: string;
 }
 
 export interface ContactInfo {
@@ -149,8 +149,7 @@ export const portfolio: PortfolioData = {
       description:
         "An AI-integrated data product blueprint generator built for the NAI group of Globe Telecom Inc. Led software development, AI and data engineering, QA testing, and system documentation.",
       tags: ["React.js", "BigQuery", "Gemini", "Vercel"],
-      // TODO: replace with the real GitHub repo URL once available.
-      repoUrl: "https://github.com/your-placeholder-handle/dataloom",
+      // Private repository — not linked.
     },
     {
       id: "proj-genie",
@@ -160,8 +159,7 @@ export const portfolio: PortfolioData = {
       description:
         "An AI-augmented ecosystem for GCash employees. Led software development, AI engineering, and QA testing.",
       tags: ["React.js", "NeonDB", "Gemini", "Vercel"],
-      // TODO: replace with the real GitHub repo URL once available.
-      repoUrl: "https://github.com/your-placeholder-handle/genie",
+      // Private repository — not linked.
     },
     {
       id: "proj-587connect",
@@ -171,8 +169,7 @@ export const portfolio: PortfolioData = {
       description:
         "A barangay information management system for Barangay 587, Sta. Mesa, Manila. Led documentation and assisted in frontend development and QA testing.",
       tags: ["React.js", "PostgreSQL", "NeonDB", "Vercel"],
-      // TODO: replace with the real GitHub repo URL once available.
-      repoUrl: "https://github.com/your-placeholder-handle/587-connect",
+      repoUrl: "https://github.com/IJMPLM/587-connect",
     },
     {
       id: "proj-seastack",
@@ -182,8 +179,7 @@ export const portfolio: PortfolioData = {
       description:
         "A functional compiler for a self-made programming language. Led development, documentation, and QA testing.",
       tags: ["Python", "Google Sheets"],
-      // TODO: replace with the real GitHub repo URL once available.
-      repoUrl: "https://github.com/your-placeholder-handle/seastack",
+      repoUrl: "https://github.com/yurnifaa/SeaStack-v2",
     },
   ],
 };
