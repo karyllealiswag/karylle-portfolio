@@ -45,7 +45,7 @@ export default function AboutContent() {
         <Divider className="my-4" />
 
         {/* Content: GroupBox creates the native tabbed-window feel */}
-        <GroupBox label="Biography" className="flex-1 text-black bg-[#c6c6c6]">
+        <GroupBox label="Professional Summary" className="flex-1 text-black bg-[#c6c6c6]">
           <div className="mt-2 space-y-3 text-sm leading-relaxed p-2 overflow-y-auto max-h-[35vh]">
             {portfolio.about.paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 24)}>{paragraph}</p>
