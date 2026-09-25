@@ -107,6 +107,18 @@ export function GameIcon(props: IconProps) {
   );
 }
 
+export function StartIcon(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <rect x="6" y="4" width="2" height="24" fill="#000" />
+      <rect x="8" y="5" width="18" height="4" fill="#ff0000" stroke="#000" strokeWidth="0.5" />
+      <rect x="8" y="9" width="18" height="4" fill="#008000" stroke="#000" strokeWidth="0.5" />
+      <rect x="8" y="13" width="18" height="4" fill="#000080" stroke="#000" strokeWidth="0.5" />
+      <rect x="8" y="17" width="18" height="4" fill="#ffff00" stroke="#000" strokeWidth="0.5" />
+    </IconBase>
+  );
+}
+
 export function MinimizeGlyph(props: IconProps) {
   return (
     <IconBase viewBox="0 0 12 12" {...props}>

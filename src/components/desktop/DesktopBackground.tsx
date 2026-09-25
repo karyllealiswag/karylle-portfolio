@@ -1,8 +1,6 @@
 import Image from "next/image";
 
-// Swap this to '/background.jpg' (dropped into /public) once the real photo
-// is available. Recommended: >=1920x1080, 16:9 or wider, JPG/PNG.
-const BACKGROUND_IMAGE_SRC: string | null = null;
+const BACKGROUND_IMAGE_SRC: string | null = "/background_2.png";
 
 export function DesktopBackground() {
   return (

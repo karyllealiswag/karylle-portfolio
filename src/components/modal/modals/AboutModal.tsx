@@ -5,25 +5,29 @@ import type { ComponentType } from "react";
 import { createPortal } from "react-dom";
 import { Window, WindowHeader, WindowContent, Button } from "react95";
 import { useFocusTrap } from "../useFocusTrap";
+import { useDraggable } from "../useDraggable";
 import { CloseGlyph, MaximizeGlyph, MinimizeGlyph } from "@/components/icons";
 import AboutContent from "../content/AboutContent";
 
 interface AboutModalProps {
   title: string;
   Icon: ComponentType<{ className?: string }>;
+  zIndex: number;
+  onFocus: () => void;
   onClose: () => void;
 }
 
 const TITLE_ID = "modal-title-about";
 
-export default function AboutModal({ title, Icon, onClose }: AboutModalProps) {
+export default function AboutModal({ title, Icon, zIndex, onFocus, onClose }: AboutModalProps) {
   const windowRef = useRef<HTMLDivElement>(null);
   useFocusTrap(windowRef, onClose);
+  const { offset, startDrag } = useDraggable(windowRef);
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
-      onClick={onClose}
+      className="fixed inset-0 flex items-center justify-center p-4 pointer-events-none"
+      style={{ zIndex }}
     >
       <Window
         ref={windowRef}
@@ -31,10 +35,11 @@ export default function AboutModal({ title, Icon, onClose }: AboutModalProps) {
         aria-modal="true"
         aria-labelledby={TITLE_ID}
         tabIndex={-1}
-        onClick={(event) => event.stopPropagation()}
-        className="flex! h-full w-full flex-col! overflow-hidden motion-reduce:transition-none sm:h-auto sm:max-h-[85dvh] sm:w-auto sm:min-w-100 sm:max-w-130 shadow-xl"
+        onMouseDown={onFocus}
+        style={{ transform: offset.x || offset.y ? `translate(${offset.x}px, ${offset.y}px)` : undefined }}
+        className="pointer-events-auto flex! h-full w-full flex-col! overflow-hidden motion-reduce:transition-none sm:h-auto sm:max-h-[85dvh] sm:w-auto sm:min-w-100 sm:max-w-130 shadow-xl"
       >
-        <WindowHeader className="flex items-center justify-between gap-2">
+        <WindowHeader onPointerDown={startDrag} className="flex items-center justify-between gap-2 select-none sm:cursor-move">
           <span className="flex min-w-0 items-center gap-2">
             <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
             <span id={TITLE_ID} className="truncate font-bold tracking-wide">

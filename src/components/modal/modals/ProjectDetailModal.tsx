@@ -4,23 +4,27 @@ import { useRef } from "react";
 import { createPortal } from "react-dom";
 import { Window, WindowHeader, WindowContent, Button, Cutout, Divider, GroupBox } from "react95";
 import { useFocusTrap } from "../useFocusTrap";
+import { useDraggable } from "../useDraggable";
 import { CloseGlyph, MaximizeGlyph, MinimizeGlyph, ProjectsIcon } from "@/components/icons";
 import type { ProjectEntry } from "@/data/portfolio";
 
 interface ProjectDetailModalProps {
   project: ProjectEntry;
+  zIndex: number;
   onClose: () => void;
 }
 
 const TITLE_ID = "modal-title-project-detail";
 
-export default function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps) {
+export default function ProjectDetailModal({ project, zIndex, onClose }: ProjectDetailModalProps) {
   const windowRef = useRef<HTMLDivElement>(null);
   useFocusTrap(windowRef, onClose);
+  const { offset, startDrag } = useDraggable(windowRef);
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-4 sm:p-6"
+      className="fixed inset-0 flex items-center justify-center bg-black/40 p-4 sm:p-6"
+      style={{ zIndex }}
       onClick={onClose}
     >
       <Window
@@ -30,9 +34,10 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
         aria-labelledby={TITLE_ID}
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
+        style={{ transform: offset.x || offset.y ? `translate(${offset.x}px, ${offset.y}px)` : undefined }}
         className="flex! h-full w-full flex-col! overflow-hidden motion-reduce:transition-none sm:h-auto sm:max-h-[90dvh] sm:w-auto sm:min-w-[500px] sm:max-w-[650px] shadow-xl"
       >
-        <WindowHeader className="flex items-center justify-between gap-2 bg-[#000080]">
+        <WindowHeader onPointerDown={startDrag} className="flex items-center justify-between gap-2 bg-[#000080] select-none sm:cursor-move">
           <span className="flex min-w-0 items-center gap-2 text-white">
             <ProjectsIcon className="h-4 w-4 shrink-0 invert" aria-hidden="true" />
             <span id={TITLE_ID} className="truncate font-bold tracking-wide">
